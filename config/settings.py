@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     
     'apps.user',
+    'apps.profile',
+    'apps.establishments',
+    'apps.news',
+    'apps.comments',
+    'apps.reviews',
 ]
 
 MIDDLEWARE = [
