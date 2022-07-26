@@ -3,9 +3,11 @@ from django.contrib.auth import get_user_model
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import AllowAny
 
+from pagination.default_pagination import DefaultPagination
 from .serializers import UserSerializer
 
 UserModel = get_user_model()
+
 
 class UserListCreateAPIView(ListCreateAPIView):
     queryset = UserModel.objects.all()

@@ -8,6 +8,7 @@ from .managers import UserManager
 class UserModel(AbstractBaseUser, PermissionsMixin):
     class Meta:
         db_table = 'auth_user'
+        ordering = ('id',)
 
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=128, validators=(
