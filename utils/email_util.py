@@ -19,5 +19,6 @@ class EmailUtils:
     #     cls._send_email(address, 'register_email.html', {'name': name, 'link': url})
 
     @classmethod
-    def register_email(cls, address: str, name: str) -> None:
-        cls._send_email(address, 'register_email.html', {'name': name})
+    def register_email(cls, address: str, name: str, token: str) -> None:
+        url = f'{os.environ.get("FRONTEND_HOST")}activate/{token}/'
+        cls._send_email(address, 'register_email.html', {'name': name, 'link':url})

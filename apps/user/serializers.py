@@ -1,11 +1,10 @@
-import os
-
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
 from rest_framework.serializers import ModelSerializer
 
 from utils.email_util import EmailUtils
+from utils.jwt_util import JwtUtils
 
 from ..profile.models import ProfileModel
 from ..profile.serializers import ProfileSerializer
@@ -38,8 +37,6 @@ class UserSerializer(ModelSerializer):
         profile = validated_data.pop('profile')
         user = UserModel.objects.create_user(**validated_data)
         ProfileModel.objects.create(**profile, user=user)
-        print(os.environ.get('EMAIL_HOST'))
-        print(os.environ.get('EMAIL_HOST_USER'))
-        print(os.environ.get('EMAIL_HOST_PASSWORD'))
-        EmailUtils.register_email(user.email, user.profile.name)
+        token = JwtUtils.create_token(user)
+        EmailUtils.register_email(user.email, user.profile.name, token)
         return user
