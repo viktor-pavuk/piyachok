@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import exception_handler
 
+from enums.error_enum import ErrorEnum
+
 
 def custom_error_handler(exc: Exception, content) -> Response:
     handlers = {
@@ -17,4 +19,4 @@ def custom_error_handler(exc: Exception, content) -> Response:
 
 
 def _jwt_validate_error(exc: Exception, content: dict) -> Response:
-    return Response('Token is invalid or expired', status.HTTP_400_BAD_REQUEST)
+    return Response(ErrorEnum.JWT.msg, ErrorEnum.JWT.code)

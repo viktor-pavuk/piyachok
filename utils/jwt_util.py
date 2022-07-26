@@ -4,15 +4,18 @@ from django.contrib.auth import get_user_model
 
 from rest_framework.generics import get_object_or_404
 
-from rest_framework_simplejwt.tokens import AccessToken, BlacklistMixin
+from rest_framework_simplejwt.tokens import Token, BlacklistMixin
 
+from enums.token_enum import TokenEnum
 from exceptions.jwt_exception import JwtException
 
 UserModel = get_user_model()
 
-class ActionToken(BlacklistMixin, AccessToken):
-    token_type = 'activation'
-    lifetime = timedelta(hours=1)
+
+class ActionToken(BlacklistMixin, Token):
+    token_type = TokenEnum.ACTIVATION.token_type
+    lifetime = TokenEnum.ACTIVATION.exp_time
+
 
 class JwtUtils:
     @staticmethod

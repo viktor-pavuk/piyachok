@@ -3,6 +3,8 @@ import os
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
+from enums.template_enum import TemplateEnum
+
 
 class EmailUtils:
     @staticmethod
@@ -21,4 +23,4 @@ class EmailUtils:
     @classmethod
     def register_email(cls, address: str, name: str, token: str) -> None:
         url = f'{os.environ.get("FRONTEND_HOST")}activate/{token}/'
-        cls._send_email(address, 'register_email.html', {'name': name, 'link':url})
+        cls._send_email(address, TemplateEnum.REGISTER.value, {'name': name, 'link':url})
