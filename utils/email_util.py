@@ -6,7 +6,7 @@ from django.template.loader import get_template
 
 class EmailUtils:
     @staticmethod
-    def _send_email(to: str, template_name: str, context: dict, subject='') -> None:
+    def _send_email(to: str, template_name: str, context: dict, subject='Підтвердіть адрес електронної пошти') -> None:
         template = get_template(template_name)
         html_content = template.render(context)
         msg = EmailMultiAlternatives(subject, from_email=os.environ.get('EMAIL_HOST'), to=[to])

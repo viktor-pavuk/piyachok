@@ -11,7 +11,7 @@ from exceptions.jwt_exception import JwtException
 UserModel = get_user_model()
 
 class ActionToken(BlacklistMixin, AccessToken):
-    token_type = 'access'
+    token_type = 'activation'
     lifetime = timedelta(hours=1)
 
 class JwtUtils:
