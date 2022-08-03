@@ -18,7 +18,7 @@ class ProfileModel(models.Model):
                        'Surname must start with the capital letter and contain from 2 to 20 letters. Example: Popov'),
     ))
     born = models.DateField()
-    phone = models.CharField(max_length=13, validators=(
+    phone = models.CharField(max_length=13, unique=True, validators=(
         RegexValidator(r'^\+380[\d]{9}$', 'Invalid phone number. Example: +380xxxxxxxxx'),
     ))
     user = models.OneToOneField(UserModel, on_delete=models.CASCADE, related_name='profile')
